@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Computer</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Edit Computer</h2>
+        <!-- Modificar el enlace para que use JavaScript -->
+        <a href="javascript:history.back()" class="btn btn-primary mb-3">Back to Home</a>
+        <form id="edit-computer-form">
+            <input type="hidden" id="computer-ref" value="">
+            <div class="form-group">
+                <label for="gpu">GPU</label>
+                <input type="text" class="form-control" id="gpu" required>
+            </div>
+            <div class="form-group">
+                <label for="cpu">CPU</label>
+                <input type="text" class="form-control" id="cpu" required>
+            </div>
+            <div class="form-group">
+                <label for="ram">RAM</label>
+                <input type="text" class="form-control" id="ram" required>
+            </div>
+            <button type="submit" class="btn btn-primary" onclick="updateComputer()">Save Changes</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="../static/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Obtener el ID del computador de la URL
+            const computerRef = "{{ ref }}";  // Usar Jinja2 para insertar el valor de ref
+
+            // Obtener la información del computador y llenar el formulario
+            fetch(`/api/computers/${computerRef}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('computer-ref').value = data.ref;
+                    document.getElementById('gpu').value = data.gpu;
+                    document.getElementById('cpu').value = data.cpu;
+                    document.getElementById('ram').value = data.ram;
+                })
+                .catch(error => console.error('Error:', error));
+
+            // Manejar el evento submit del formulario
+            document.getElementById('edit-computer-form').addEventListener('submit', function (event) {
+                event.preventDefault();  // Prevenir la recarga de la página
+                updateComputer();  // Llamar a la función para actualizar el computador
+            });
+        });
+    </script>
+
+</body>
+
+</html>

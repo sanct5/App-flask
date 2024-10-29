@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Management</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-top: 50px;
+            padding-bottom: 20px;
+        }
+        .navbar {
+            margin-bottom: 20px;
+        }
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .computer-list {
+            margin-top: 20px;
+            list-style-type: none;
+        }
+        .computer-item {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .computer-item a {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">Computer Management</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</nav>
+
+<div class="container">
+    <div class="form-container">
+        <h2>Add New Computer</h2>
+        <form id="add-computer-form">
+            <div class="form-group">
+                <label for="ref">Reference</label>
+                <input type="text" class="form-control" id="ref" required>
+            </div>
+            <div class="form-group">
+                <label for="gpu">GPU</label>
+                <input type="text" class="form-control" id="gpu" required>
+            </div>
+            <div class="form-group">
+                <label for="cpu">CPU</label>
+                <input type="text" class="form-control" id="cpu" required>
+            </div>
+            <div class="form-group">
+                <label for="ram">RAM</label>
+                <input type="text" class="form-control" id="ram" required>
+            </div>
+            <button type="button" onclick="createComputer({{ id }})">Create Computer</button>
+        </form>
+    </div>
+
+    <h2>Computers List</h2>
+    <table id="computer-list" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Reference</th>
+                <th>GPU</th>
+                <th>CPU</th>
+                <th>RAM</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <button type="button" onclick="getUserComputers({{ id }})">Get Computers</button>
+</div>
+<script src="../static/script.js"></script>
+</body>
+</html>
